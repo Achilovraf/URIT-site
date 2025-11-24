@@ -11,28 +11,26 @@
           <h1
             class="text-4xl lg:text-5xl xl:text-4xl font-bold text-gray-900 leading-tight"
           >
-            Точный контроль сахара<br />
-            каждый день с
+            {{ content.title[locale] }}<br />
+            {{ content.subtitle[locale] }}
             <span class="bg-blue-600 rounded text-white px-3 py-1 inline-block"
               >URIT-86</span
             >
             <br />
-            <span class="text-blue-600">За 5 секунд</span>
+            <span class="text-blue-600">{{ content.time[locale] }}</span>
           </h1>
 
           <!-- Подзаголовок -->
           <p class="text-lg text-gray-700 leading-relaxed max-w-2xl">
-            Используется для регулярного измерения уровня глюкозы в крови у
-            пациентов с диабетом 1 и 2 типа, а также для профилактического
-            контроля
+            {{ content.description[locale] }}
           </p>
 
           <!-- Кнопки -->
           <div class="flex flex-wrap gap-4 pt-4">
             <button
-              class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
-              Где купить
+              {{ content.buyButton[locale] }}
             </button>
 
             <button
@@ -57,25 +55,14 @@
           </div>
         </div>
 
-        <!-- Правая часть - изображения -->
-        <div class="relative h-[450px] lg:h-[600px] pr-0">
-          <!-- Круглый фон - абсолютное позиционирование -->
+        <!-- Правая часть -->
+        <div class="flex-1 flex justify-center items-center">
           <img
-            src="/images/use__img.png"
-            alt="Background"
-            class="absolute top-0 right-0 translate-x-[25%] w-[300px] h-[300px] lg:w-[550px] lg:h-[450px] object-cover"
+            class="w-9/10"
+            src="/images/urit-hero.png"
+            width="250"
+            alt="Глюкометр"
           />
-
-          <!-- Глюкометр поверх фона -->
-          <div
-            class="relative z-10 flex justify-center items-center h-full pt-8"
-          >
-            <img
-              src="/images/Глюкометр 4.png"
-              alt="URIT-86 Глюкометр"
-              class="w-[200px] h-[280px] lg:w-[250px] lg:h-[300px] object-contain drop-shadow-2xl"
-            />
-          </div>
         </div>
       </div>
     </div>
@@ -95,6 +82,26 @@ const store = useAppStore();
 const locale = computed(() => store.locale);
 
 const content = {
+  title: {
+    ru: "Контролируй сахар легко - ",
+    uz: "Shakarni osongina boshqaring",
+  },
+  subtitle: {
+    ru: "с заботой о себе ",
+    uz: "o'zingiz va yaqinlaringiz.",
+  },
+  time: {
+    ru: "и близких.",
+    uz: "parvarishi uchun.",
+  },
+  description: {
+    ru: "Компактный и быстрый глюкометр с высокой точностью. Результат за 5 секунд минимальный прокол, максимум удобства. Забудьте о бесконечной очереди в поликлинике и сложных измерениях - все просто !",
+    uz: "1 va 2-toifa diabet kasalligiga chalingan bemorlarning qon glyukoza darajasini muntazam o'lchash, shuningdek profilaktik nazorat qilish uchun ishlatiladi",
+  },
+  buyButton: {
+    ru: "Где купить",
+    uz: "Qayerdan sotib olish",
+  },
   buttonText: {
     ru: "Смотреть инструкцию",
     uz: "Yo'riqnomani ko'rish",
