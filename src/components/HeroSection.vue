@@ -55,25 +55,15 @@
           </div>
         </div>
 
-        <!-- Правая часть - изображения -->
-        <div class="relative h-[450px] lg:h-[600px] pr-0">
-          <!-- Круглый фон - абсолютное позиционирование -->
+        <!-- Правая часть -->
+        <div class="flex-1 flex justify-center items-center">
           <img
-            src="/images/working-parents-1024x1024.jpg"
-            alt="Background"
-            class="absolute top-0 right-0 translate-x-[25%] w-[300px] h-[300px] lg:w-[550px] lg:h-[450px] object-cover"
+            class="w-9/10"
+            src="/images/urit-hero.png"
+            width="250"
+            alt="Глюкометр"
           />
-
-          <!-- Глюкометр поверх фона -->
-          <div
-            class="relative z-10 flex justify-center items-center h-full pt-8"
-          >
-            <img
-              src="/images/Глюкометр 4.png"
-              alt="URIT-86 Глюкометр"
-              class="w-[200px] h-[180px] lg:w-[250px] lg:h-[2200px] object-contain drop-shadow-2xl"
-            />
-          </div>        </div>
+        </div>
       </div>
     </div>
 
@@ -94,28 +84,28 @@ const locale = computed(() => store.locale);
 const content = {
   title: {
     ru: "Контролируй сахар легко - ",
-    uz: "Shakarni osongina boshqaring"
+    uz: "Shakarni osongina boshqaring",
   },
   subtitle: {
     ru: "с заботой о себе ",
-    uz: "o'zingiz va yaqinlaringiz."
+    uz: "o'zingiz va yaqinlaringiz.",
   },
   time: {
     ru: "и близких.",
-    uz: "parvarishi uchun."
+    uz: "parvarishi uchun.",
   },
   description: {
     ru: "Компактный и быстрый глюкометр с высокой точностью. Результат за 5 секунд минимальный прокол, максимум удобства. Забудьте о бесконечной очереди в поликлинике и сложных измерениях - все просто !",
-    uz: "1 va 2-toifa diabet kasalligiga chalingan bemorlarning qon glyukoza darajasini muntazam o'lchash, shuningdek profilaktik nazorat qilish uchun ishlatiladi"
+    uz: "1 va 2-toifa diabet kasalligiga chalingan bemorlarning qon glyukoza darajasini muntazam o'lchash, shuningdek profilaktik nazorat qilish uchun ishlatiladi",
   },
   buyButton: {
     ru: "Где купить",
-    uz: "Qayerdan sotib olish"
+    uz: "Qayerdan sotib olish",
   },
   buttonText: {
     ru: "Смотреть инструкцию",
-    uz: "Yo'riqnomani ko'rish"
-  }
+    uz: "Yo'riqnomani ko'rish",
+  },
 };
 
 const openInstructionModal = () => {

@@ -170,7 +170,7 @@ const content = {
 const partners = [
   {
     name: 'Apteka.uz',
-    logo: '/images/partners/apteka-uz.png',
+    logo: 'images/partners/apteka-uz.png',
     description: {
       ru: 'Крупнейшая онлайн-аптека Узбекистана',
       uz: 'O\'zbekistonning eng yirik onlayn dorixonasi'
@@ -179,7 +179,7 @@ const partners = [
   },
   {
     name: 'GoPharm',
-    logo: '/images/partners/gopharm.png',
+    logo: 'images/partners/gopharm.png',
     description: {
       ru: 'Интернет-аптека с доставкой по  Ташкенту',
       uz: 'Butun Toshkent bo\'ylab yetkazib berish bilan internet-dorixona'
@@ -188,7 +188,7 @@ const partners = [
   },
   {
     name: 'PharmaClick',
-    logo: '/images/partners/pharmaclik.png',
+    logo: 'images/partners/pharmaclik.png',
     description: {
       ru: 'Быстрая доставка медицинских товаров',
       uz: 'Tibbiy mahsulotlarni tez yetkazib berish'

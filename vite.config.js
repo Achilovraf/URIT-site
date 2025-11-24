@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src') // теперь @ = src
+      '@': path.resolve(__dirname, './src') 
     },
   },
   server: {
@@ -15,4 +15,5 @@ export default defineConfig({
     host: true,
     strictPort: false,
   },
+  base: '/URIT-site/', 
 })
