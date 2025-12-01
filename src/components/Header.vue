@@ -46,11 +46,12 @@
         <div class="flex items-center gap-4">
           <LanguageSwitcher />
 
-          <button
+          <a
+            href="#buy"
             class="hidden lg:block bg-transparent hover:bg-blue-600 text-blue-600 font-semibold px-6 py-2 rounded-full border border-blue-600 hover:text-white transition-all"
           >
             {{ locale === 'ru' ? 'Где купить?' : 'Qayerdan sotib olish?' }}
-          </button>
+          </a>
 
           <!-- Mobile menu toggle -->
           <button
@@ -96,11 +97,13 @@
 
         </template>
 
-        <button
+        <a
+          href="#buy"
           class="bg-transparent text-gray-900 font-semibold px-6 py-3 rounded-full border-2 border-gray-900 hover:border-blue-600 hover:text-blue-600 transition-all mt-2"
+          @click="mobileMenuOpen = false"
         >
           {{ locale === 'ru' ? 'Где купить?' : 'Qayerdan sotib olish?' }}
-        </button>
+        </a>
       </nav>
     </div>
   </header>
@@ -109,7 +112,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAppStore } from '../store'
-import { RouterLink } from 'vue-router'  // ← добавь это
+import { RouterLink } from 'vue-router'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const store = useAppStore()
@@ -125,7 +128,7 @@ const navItems = [
     active: false
   },
   {
-    label: { ru: 'Принцип действия', uz: "Harakat prinsipi" },
+    label: { ru: 'Принцип действия', uz: "Ta'sir qilish prinsipi" },
     href: '#advantages',
     active: false
   },

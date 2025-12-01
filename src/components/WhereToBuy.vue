@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto">
       <!-- Заголовок секции -->
       <div class="text-center mb-16">
-        <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
           {{ content.title[locale] }}
         </h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -13,14 +13,14 @@
 
       <!-- Партнеры (логотипы аптек) -->
       <div class="mb-20">
-        <h3 class="text-2xl font-bold text-center mb-10 text-gray-800">
+        <h3 class="text-2xl font-bold text-center mb-10 text-gray-800 h-full">
           {{ content.partnersTitle[locale] }}
         </h3>
         <div class="grid md:grid-cols-3 gap-8">
           <div
             v-for="(partner, index) in partners"
             :key="index"
-            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group cursor-pointer"
+            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group cursor-pointer flex flex-col"
           >
             <div class="flex items-center justify-center h-24 mb-6">
               <img
@@ -32,13 +32,13 @@
             <h4 class="text-xl font-semibold text-center mb-3 text-gray-900">
               {{ partner.name }}
             </h4>
-            <p class="text-gray-600 text-center mb-6">
+            <p class="text-gray-600 text-center mb-6 flex-grow">
               {{ partner.description[locale] }}
             </p>
             <a
               :href="partner.link"
               target="_blank"
-              class="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 text-center hover:scale-105"
+              class="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 text-center hover:scale-105 mt-auto"
             >
               {{ content.visitButton[locale] }}
             </a>
@@ -134,7 +134,6 @@
 <script setup>
 import { computed } from "vue";
 import { useAppStore } from "../store";
-// import tuvsud from '@/assets/images/TÜV SÜD.png'
 
 const store = useAppStore();
 const locale = computed(() => store.locale);

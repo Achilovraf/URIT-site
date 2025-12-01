@@ -1,6 +1,6 @@
 <!-- urit-86-landing/src/components/Advantages.vue -->
 <template>
-  <section id="advantages" class="py-20 px-4 bg-gradient-to-br from-blue-50 to-indigo-50">
+  <section id="advantages" class="py-20 px-4">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">
         {{ locale === 'ru' ? 'Преимущества URIT-86' : 'URIT-86 afzalliklari' }}

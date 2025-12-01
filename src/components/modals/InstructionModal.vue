@@ -19,7 +19,7 @@
       <!-- Кнопка -->
       <div class="flex justify-center">
         <a
-          href="/files/urit-86-instruction.pdf"
+          href="/URIT-site/files/urit-86-instruction.pdf"
           target="_blank"
           class="group inline-flex items-center gap-3 
       border-2  border-indigo-700

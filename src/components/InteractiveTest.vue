@@ -1,55 +1,34 @@
 <template>
-  <!-- <section id="test" class="py-20 px-4 relative overflow-hidden"> -->
-    
-
-    <!-- Стартовый экран с анимацией -->
+  <section id="test" class="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
+    <!-- Стартовый экран -->
     <div v-if="!testStarted && !showResults" class="relative">
       <!-- Декоративные элементы фона -->
-    <div class="opacity-10">
-      <div
-        class="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse"
-      ></div>
-      <div
-        class="absolute bottom-20 right-20 w-48 h-48 bg-white rounded-full blur-3xl animate-pulse"
-        style="animation-delay: 1s"
-      ></div>
-      <div
-        class="absolute top-1/2 left-1/3 w-24 h-24 bg-white rounded-full blur-2xl animate-pulse"
-        style="animation-delay: 2s"
-      ></div>
-    </div>
-
-    <!-- <div class="max-w-4xl mx-auto relative z-10"> -->
-
-    <!-- Заголовок -->
-    <div class="text-center mb-50">
-      <h2 class="text-4xl lg:text-5xl pb-20 font-bold text-white mb-4 drop-shadow-lg">
-        {{ content.title[locale] }}
-      </h2>
-      <p class="text-xl text-white/90 drop-shadow">
-        {{ content.subtitle[locale] }}
-      </p>
-    </div>
-      <!-- Видео фон -->
-      <div class="absolute inset-0 rounded-3xl overflow-hidden">
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          class="w-full h-full object-cover"
-        >
-          <source src="/public/images/Глюкометр.mp4" type="video/mp4" />
-          <!-- <source src="/path/to/your/video.webm" type="video/webm" /> -->
-        </video>
-        <!-- Градиент оверлей для лучшей читаемости -->
+      <div class="opacity-20">
         <div
-          class="absolute inset-0  "
+          class="absolute top-10 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl animate-pulse"
+        ></div>
+        <div
+          class="absolute bottom-20 right-20 w-48 h-48 bg-indigo-400 rounded-full blur-3xl animate-pulse"
+          style="animation-delay: 1s"
+        ></div>
+        <div
+          class="absolute top-1/2 left-1/3 w-24 h-24 bg-blue-300 rounded-full blur-2xl animate-pulse"
+          style="animation-delay: 2s"
         ></div>
       </div>
 
-      <!-- Контент поверх видео -->
-      <div class="relative z-10  p-10 rounded-3xl">
+      <div class="max-w-4xl mx-auto relative z-10">
+        <!-- Заголовок -->
+        <div class="text-center mb-16">
+          <h2 class="text-4xl lg:text-5xl pb-6 font-bold text-gray-900 mb-4">
+            {{ content.title[locale] }}
+          </h2>
+          <p class="text-xl text-gray-700">
+            {{ content.subtitle[locale] }}
+          </p>
+        </div>
+
+        <!-- Контент без белого контейнера -->
         <div class="text-center space-y-8">
           <!-- Интерактивная анимация капли крови -->
           <div class="relative w-64 h-64 mx-auto">
@@ -141,7 +120,7 @@
                   class="absolute inset-0 flex items-center justify-center"
                 >
                   <div
-                    class="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"
+                    class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"
                   ></div>
                 </div>
 
@@ -151,7 +130,7 @@
                   class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 >
                   <div
-                    class="w-20 h-20 border-2 border-primary rounded-full animate-ping"
+                    class="w-20 h-20 border-2 border-blue-600 rounded-full animate-ping"
                   ></div>
                 </div>
               </div>
@@ -162,7 +141,7 @@
               v-if="!bloodDropActive"
               class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center whitespace-nowrap"
             >
-              <p class="text-primary font-semibold animate-bounce">
+              <p class="text-blue-600 font-semibold animate-bounce">
                 {{ content.clickFinger[locale] }} 👆
               </p>
             </div>
@@ -173,7 +152,7 @@
               {{ content.startTitle[locale] }}
             </h3>
 
-            <p class="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">
               {{ content.startDescription[locale] }}
             </p>
           </div>
@@ -181,10 +160,10 @@
       </div>
     </div>
 
-    <!-- Тест с новым дизайном -->
+    <!-- Тест -->
     <div
       v-if="testStarted && !showResults"
-      class="bg-white/95 backdrop-blur-xl p-8 lg:p-10 rounded-3xl shadow-2xl"
+      class="max-w-4xl mx-auto bg-white/95 backdrop-blur-xl p-8 lg:p-10 rounded-3xl shadow-2xl"
     >
       <!-- Прогресс-бар -->
       <div class="mb-8">
@@ -193,13 +172,13 @@
             {{ content.question[locale] }} {{ currentQuestion + 1 }}
             {{ content.of[locale] }} {{ questions.length }}
           </span>
-          <span class="text-sm font-semibold text-primary">
+          <span class="text-sm font-semibold text-blue-600">
             {{ Math.round(((currentQuestion + 1) / questions.length) * 100) }}%
           </span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-3">
           <div
-            class="bg-gradient-to-r from-primary to-indigo-600 h-3 rounded-full transition-all duration-500"
+            class="bg-gradient-to-r from-blue-600 to-indigo-600 h-3 rounded-full transition-all duration-500"
             :style="{
               width: ((currentQuestion + 1) / questions.length) * 100 + '%',
             }"
@@ -223,8 +202,8 @@
             class="w-full text-left p-6 rounded-xl border-2 transition-all"
             :class="[
               isOptionSelected(option)
-                ? 'border-primary text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md'
-                : 'border-blue-700 hover:border-primary/50 hover:bg-gray-50',
+                ? 'border-blue-600 text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md'
+                : 'border-gray-300 hover:border-blue-600/50 hover:bg-gray-50',
             ]"
           >
             <div class="flex items-center gap-4">
@@ -232,19 +211,19 @@
                 class="w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all"
                 :class="[
                   isOptionSelected(option)
-                    ? 'border-primary bg-primary'
-                    : 'border-black',
+                    ? 'border-white bg-white'
+                    : 'border-gray-400',
                 ]"
               >
                 <div
                   v-if="isOptionSelected(option)"
-                  class="w-3 h-3 bg-white rounded-full"
+                  class="w-3 h-3 bg-blue-600 rounded-full"
                 ></div>
               </div>
               <span
                 class="text-lg font-medium transition-colors"
                 :class="[
-                  isOptionSelected(option) ? 'text-primary' : 'text-gray-700',
+                  isOptionSelected(option) ? 'text-white' : 'text-gray-700',
                 ]"
               >
                 {{ option[locale] }}
@@ -281,7 +260,7 @@
           v-if="currentQuestion > 0"
           @click="previousQuestion"
           type="button"
-          class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600  text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
           <svg
             class="w-5 h-5"
@@ -304,10 +283,10 @@
         <button
           @click="nextQuestion"
           type="button"
-          class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600  text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           :class="[
             hasAnswered()
-              ? 'hover:bg-primary-600 hover:scale-105'
+              ? 'hover:bg-blue-700 hover:scale-105'
               : 'opacity-50 cursor-not-allowed',
           ]"
         >
@@ -333,10 +312,10 @@
       </div>
     </div>
 
-    <!-- Результаты с улучшенным дизайном -->
+    <!-- Результаты -->
     <div
       v-if="showResults"
-      class="bg-white/95 backdrop-blur-xl p-10 rounded-3xl shadow-2xl"
+      class="max-w-4xl mx-auto bg-white/95 backdrop-blur-xl p-10 rounded-3xl shadow-2xl"
     >
       <div class="text-center space-y-6">
         <!-- Иконка результата -->
@@ -371,7 +350,7 @@
 
         <!-- Рекомендация -->
         <div
-          class="bg-blue-50 border-l-4 border-primary p-6 rounded-r-xl text-left"
+          class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-xl text-left"
         >
           <h4 class="font-bold text-gray-900 mb-2">
             {{ content.recommendation[locale] }}
@@ -381,27 +360,18 @@
           </p>
         </div>
 
-        <!-- Кнопки действий -->
-        <div class="flex flex-wrap justify-center gap-4 pt-4">
-          <button
-            @click="scrollToBuy"
-            class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600  text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-          >
-            {{ content.buyButton[locale] }}
-          </button>
-
+        <!-- Кнопка пройти тест заново -->
+        <div class="pt-4">
           <button
             @click="resetTest"
-            class="group inline-flex items-center gap-3 border-2 border-indigo-700 bg-white border-gradient-to-r from-blue-600 to-indigo-600 text-black font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:text-white hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700 hover:[background-clip:border-box]"
+            class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           >
             {{ content.retakeButton[locale] }}
           </button>
         </div>
       </div>
     </div>
-
-    <!-- </div> -->
-  <!-- </section> -->
+  </section>
 </template>
 
 <script setup>
@@ -441,10 +411,6 @@ const content = {
     ru: "Ответьте на 5 простых вопросов, чтобы оценить необходимость регулярного контроля уровня глюкозы и узнать, подходит ли вам URIT-86.",
     uz: "Glyukoza darajasini muntazam nazorat qilish zarurligini baholash va URIT-86 sizga mos kelishi-kelmasligini bilish uchun 5 ta oddiy savolga javob bering.",
   },
-  startButton: {
-    ru: "Начать тест",
-    uz: "Testni boshlash",
-  },
   question: {
     ru: "Вопрос",
     uz: "Savol",
@@ -472,10 +438,6 @@ const content = {
   recommendation: {
     ru: "Наша рекомендация:",
     uz: "Bizning tavsiyamiz:",
-  },
-  buyButton: {
-    ru: "Где купить URIT-86",
-    uz: "URIT-86 ni qayerdan sotib olish",
   },
   retakeButton: {
     ru: "Пройти тест заново",
@@ -626,16 +588,13 @@ const questions = [
   },
 ];
 
-// Анимация капли крови и начало теста
 const startBloodDrop = () => {
   bloodDropActive.value = true;
 
-  // Через 1.5 секунды начинаем анализ
   setTimeout(() => {
     analyzing.value = true;
   }, 1500);
 
-  // Через 3 секунды запускаем тест
   setTimeout(() => {
     startTest();
   }, 3500);
@@ -651,45 +610,37 @@ const startTest = () => {
   fingerHover.value = false;
 };
 
-// Проверяет, выбрана ли данная опция
 const isOptionSelected = (option) => {
   const currentAnswer = answers.value[currentQuestion.value];
   if (!currentAnswer) return false;
   return currentAnswer.score === option.score && currentAnswer.ru === option.ru;
 };
 
-// Проверяет, ответил ли пользователь на текущий вопрос
 const hasAnswered = () => {
   return answers.value[currentQuestion.value] !== undefined;
 };
 
-// Выбор ответа
 const selectAnswer = (index) => {
   const selectedOption = questions[currentQuestion.value].options[index];
   answers.value[currentQuestion.value] = selectedOption;
   showValidationError.value = false;
 };
 
-// Переход к следующему вопросу
 const nextQuestion = () => {
-  // Валидация
   if (!hasAnswered()) {
     showValidationError.value = true;
     return;
   }
 
-  // Переход к следующему вопросу или результатам
   if (currentQuestion.value < questions.length - 1) {
     currentQuestion.value++;
     showValidationError.value = false;
   } else {
-    // Показываем результаты
     showResults.value = true;
     testStarted.value = false;
   }
 };
 
-// Возврат к предыдущему вопросу
 const previousQuestion = () => {
   if (currentQuestion.value > 0) {
     currentQuestion.value--;
@@ -697,7 +648,6 @@ const previousQuestion = () => {
   }
 };
 
-// Подсчет общего балла
 const calculateScore = () => {
   let totalScore = 0;
   answers.value.forEach((answer) => {
@@ -708,7 +658,6 @@ const calculateScore = () => {
   return totalScore;
 };
 
-// Определение уровня риска
 const getRiskLevel = () => {
   const score = calculateScore();
 
@@ -766,7 +715,6 @@ const getRiskLevel = () => {
   }
 };
 
-// Сброс теста
 const resetTest = () => {
   testStarted.value = false;
   showResults.value = false;
@@ -776,11 +724,6 @@ const resetTest = () => {
   bloodDropActive.value = false;
   analyzing.value = false;
   fingerHover.value = false;
-};
-
-// Скролл к блоку "Где купить"
-const scrollToBuy = () => {
-  document.getElementById("buy")?.scrollIntoView({ behavior: "smooth" });
 };
 </script>
 

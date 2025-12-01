@@ -1,5 +1,6 @@
 <template>
   <div class="font-sans text-gray-900 bg-white relative">
+    
     <LandingPage />
 
     <!-- Модалка поверх всего экрана -->
@@ -11,6 +12,7 @@
 import LandingPage from './views/LandingPage.vue'
 import { ref } from 'vue'
 import InstructionModal from './components/modals/InstructionModal.vue'
+
 
 const instructionModalRef = ref(null)
 
