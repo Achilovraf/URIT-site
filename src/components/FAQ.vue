@@ -32,8 +32,8 @@ const faqs = computed(() => [
   {
     question: locale.value === 'ru' ? 'Можно ли использовать повторно?' : 'Qayta ishlatish mumkinmi?',
     answer: locale.value === 'ru'
-      ? 'Нет, тест предназначен для одноразового использования.'
-      : 'Yo\'q, test bir martalik foydalanish uchun mo\'ljallangan.'
+      ? 'Аппарат - да, а вот тест полоски нужно менять каждый раз.'
+      : 'Ha, lekin test chiziqchalarni har safar almashtirish kerak'
   },
   {
     question: locale.value === 'ru' ? 'Когда лучше делать тест?' : 'Testni qachon qilish yaxshi?',

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 
-const Products = () => import("@/views/Products.vue");
+// const Products = () => import("@/views/Products.vue");
 
 const routes = [
   {
@@ -9,11 +9,11 @@ const routes = [
     name: "home",
     component: LandingPage,
   },
-  { 
-    path: "/products", 
-    name: "products", 
-    component: Products 
-  },
+  // { 
+  //   path: "/products", 
+  //   name: "products", 
+  //   component: Products 
+  // },
 ];
 
 const router = createRouter({

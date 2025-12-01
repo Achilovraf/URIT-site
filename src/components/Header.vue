@@ -133,7 +133,7 @@ const navItems = [
     active: false
   },
   {
-    label: { ru: 'Схема приема', uz: "Foydalanish sxemasi" },
+    label: { ru: 'Схема использования', uz: "Foydalanish sxemasi" },
     href: '#steps',
     active: false
   },

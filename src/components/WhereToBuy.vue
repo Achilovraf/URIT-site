@@ -211,7 +211,7 @@ const partners = [
       ru: "Быстрая доставка медицинских товаров",
       uz: "Tibbiy mahsulotlarni tez yetkazib berish",
     },
-    link: "https://pharmaclik.uz",
+    link: "https://pharmaclick.uz/ru/",
   },
 ];
 </script>
