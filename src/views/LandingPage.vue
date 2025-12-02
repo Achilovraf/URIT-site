@@ -9,10 +9,11 @@
     <Results id="results" />
     <WhereToBuy id="buy" />
     <FAQ id="faq" />
+    
+    <!-- Используем CTAForm (не ContactSection) -->
     <CTAForm id="contact" />
+    
     <Footer />
-
-    <!-- Модалка вне всех секций -->
     <InstructionModal ref="instructionModalRef" />
   </div>
 </template>
@@ -27,7 +28,7 @@ import UsageSteps from '../components/UsageSteps.vue'
 import Results from '../components/Results.vue'
 import WhereToBuy from '../components/WhereToBuy.vue'
 import FAQ from '../components/FAQ.vue'
-import CTAForm from '../components/CTAForm.vue'
+import CTAForm from '../components/CTAForm.vue'  // ← Ваша форма
 import Footer from '../components/Footer.vue'
 
 import { ref } from 'vue'

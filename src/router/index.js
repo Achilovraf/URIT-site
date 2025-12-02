@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
+import AdminPanel from '../views/AdminPanel.vue'
 
 // const Products = () => import("@/views/Products.vue");
 
@@ -8,6 +9,11 @@ const routes = [
     path: "/",
     name: "home",
     component: LandingPage,
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: AdminPanel
   },
   // { 
   //   path: "/products", 
