@@ -1,8 +1,6 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";  // ← ИЗМЕНЕНО
 import LandingPage from "../views/LandingPage.vue";
 import AdminPanel from '../views/AdminPanel.vue'
-
-// const Products = () => import("@/views/Products.vue");
 
 const routes = [
   {
@@ -15,15 +13,10 @@ const routes = [
     name: 'Admin',
     component: AdminPanel
   },
-  // { 
-  //   path: "/products", 
-  //   name: "products", 
-  //   component: Products 
-  // },
 ];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),  
   routes,
   scrollBehavior(to) {
     if (to.hash) {
