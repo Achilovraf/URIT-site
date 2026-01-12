@@ -1,5 +1,5 @@
 <template>
-  <section id="faq" class="py-20 px-4 bg-white">
+  <section id="faq" class="py-20 px-4 ">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">
         {{ locale === 'ru' ? 'Частые вопросы' : 'Tez-tez so\'raladigan savollar' }}

@@ -22,8 +22,9 @@
             <!-- Anchor link (#section) -->
             <a
               v-if="item.href.startsWith('#')"
-              :href="item.href"
-              class="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              href="#"
+              @click.prevent="navigateToSection(item.href)"
+              class="text-gray-700 hover:text-blue-600 transition-colors font-medium cursor-pointer"
               :class="{ 'text-blue-600 font-bold': item.active }"
             >
               {{ item.label[locale] }}
@@ -47,8 +48,9 @@
           <LanguageSwitcher />
 
           <a
-            href="#buy"
-            class="hidden lg:block bg-transparent hover:bg-blue-600 text-blue-600 font-semibold px-6 py-2 rounded-full border border-blue-600 hover:text-white transition-all"
+            href="#"
+            @click.prevent="navigateToSection('#buy')"
+            class="hidden lg:block bg-transparent hover:bg-blue-600 text-blue-600 font-semibold px-6 py-2 rounded-full border border-blue-600 hover:text-white transition-all cursor-pointer"
           >
             {{ locale === 'ru' ? 'Где купить?' : 'Qayerdan sotib olish?' }}
           </a>
@@ -78,9 +80,9 @@
           <!-- Anchor link -->
           <a
             v-if="item.href.startsWith('#')"
-            :href="item.href"
-            class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-            @click="mobileMenuOpen = false"
+            href="#"
+            @click.prevent="navigateToSection(item.href); mobileMenuOpen = false"
+            class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 cursor-pointer"
           >
             {{ item.label[locale] }}
           </a>
@@ -98,9 +100,9 @@
         </template>
 
         <a
-          href="#buy"
-          class="bg-transparent text-gray-900 font-semibold px-6 py-3 rounded-full border-2 border-gray-900 hover:border-blue-600 hover:text-blue-600 transition-all mt-2"
-          @click="mobileMenuOpen = false"
+          href="#"
+          @click.prevent="navigateToSection('#buy'); mobileMenuOpen = false"
+          class="bg-transparent text-gray-900 font-semibold px-6 py-3 rounded-full border-2 border-gray-900 hover:border-blue-600 hover:text-blue-600 transition-all mt-2 cursor-pointer"
         >
           {{ locale === 'ru' ? 'Где купить?' : 'Qayerdan sotib olish?' }}
         </a>
@@ -112,11 +114,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAppStore } from '../store'
-import { RouterLink } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const store = useAppStore()
 const locale = computed(() => store.locale)
+const router = useRouter()
+const route = useRoute()
 
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
@@ -143,6 +147,36 @@ const navItems = [
     active: false
   }
 ]
+
+// Плавный скролл к секции
+const scrollToSection = (sectionId) => {
+  const section = document.querySelector(sectionId)
+  if (section) {
+    const headerOffset = 80
+    const elementPosition = section.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+// Навигация к секции (с учетом текущей страницы)
+const navigateToSection = (sectionId) => {
+  // Если мы уже на главной странице — просто скроллим
+  if (route.path === '/') {
+    scrollToSection(sectionId)
+  } else {
+    // Если на другой странице — сначала переходим на главную, потом скроллим
+    router.push('/').then(() => {
+      setTimeout(() => {
+        scrollToSection(sectionId)
+      }, 100)
+    })
+  }
+}
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50

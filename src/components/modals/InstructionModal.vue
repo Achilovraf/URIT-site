@@ -10,7 +10,7 @@
       <!-- Изображение продукта -->
       <div class="flex justify-center mb-10">
         <img
-          src="/images/Глюкометр 4.png"
+          src="/images/glucometer-4.png"
           alt="URIT-86 Глюкометр"
           class="w-64 h-auto lg:w-80 object-contain drop-shadow-2xl"
         />

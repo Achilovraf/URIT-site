@@ -1,5 +1,5 @@
 <template>
-  <section id="test" class="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
+  <section id="test" class="py-20 px-4 relative overflow-hidden bg-gradient-to-br ">
     <!-- Стартовый экран -->
     <div v-if="!testStarted && !showResults" class="relative">
       <!-- Декоративные элементы фона -->

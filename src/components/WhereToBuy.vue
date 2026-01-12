@@ -1,5 +1,5 @@
 <template>
-  <section id="buy" class="py-20 px-4 bg-gradient-to-b to-white">
+  <section id="buy" class="py-20 px-4 bg-gradient-to-b ">
     <div class="max-w-7xl mx-auto">
       <!-- Заголовок секции -->
       <div class="text-center mb-16">
@@ -186,15 +186,6 @@ const content = {
 };
 
 const partners = [
-  {
-    name: "Apteka.uz",
-    logo: "images/partners/apteka-uz.png",
-    description: {
-      ru: "Крупнейшая онлайн-аптека Узбекистана",
-      uz: "O'zbekistonning eng yirik onlayn dorixonasi",
-    },
-    link: "https://apteka.uz",
-  },
   {
     name: "GoPharm",
     logo: "images/partners/gopharm.png",

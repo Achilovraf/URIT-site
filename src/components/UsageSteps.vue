@@ -1,5 +1,5 @@
 <template>
-  <section id="steps" class="py-20 px-4 bg-gradient-to-b from-white to-blue-50">
+  <section id="steps" class="py-20 px-4 bg-gradient-to-b ">
     <div class="max-w-7xl mx-auto">
       <!-- Заголовок секции -->
       <div class="text-center mb-16">
@@ -16,17 +16,18 @@
         <div
           v-for="(step, index) in mainSteps"
           :key="index"
-          class="text-center group">
+          class="text-center group"
+        >
           <!-- Иконка вместо круга с номером -->
           <div class="relative mb-6">
             <div
-              class="bg-white w-32 h-32 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-2xl transition-all duration-500 border-4 border-blue-100 group-hover:border-blue-700 group-hover:scale-110">
+              class="bg-white w-32 h-32 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-2xl transition-all duration-500 border-4 border-blue-100 group-hover:border-blue-700 group-hover:scale-110"
+            >
               <component
                 :is="step.icon"
                 class="w-20 h-20 text-blue-600 transition-all duration-500 group-hover:scale-110"
               />
             </div>
-            
           </div>
 
           <!-- Номер шага (badge) -->
@@ -79,24 +80,22 @@
 
       <!-- Кнопка скачать полную инструкцию -->
       <div class="text-center">
-        <button
-          class="group inline-flex items-center gap-3 border-2 border-indigo-700 bg-white text-black font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-600"
+        <div class="flex justify-center">
+        <a
+          href="/URIT-site/files/urit-86-instruction.pdf"
+          target="_blank"
+          class="group inline-flex items-center gap-3 
+      border-2  border-indigo-700
+      bg-white border-gradient-to-r from-blue-600 to-indigo-600 
+      text-black font-bold px-10 py-4 rounded-xl 
+      shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105
+      hover:text-white hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700 hover:[background-clip:border-box]"
         >
-          <svg
-            class="w-5 h-5 transition-colors"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
+          <PdfFileIcon
+            class="w-6 h-6 text-black group-hover:text-white transition-colors duration-300"/>
           <span>{{ content.downloadButton[locale] }}</span>
-        </button>
+        </a>
+      </div>
       </div>
     </div>
   </section>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     <HeroSection @open-modal="openInstructionModal" id="hero" />
     <AboutProduct @open-modal="openInstructionModal" id="about" />
     <Advantages id="advantages" />
@@ -13,7 +12,6 @@
     <!-- Используем CTAForm (не ContactSection) -->
     <CTAForm id="contact" />
     
-    <Footer />
     <InstructionModal ref="instructionModalRef" />
   </div>
 </template>

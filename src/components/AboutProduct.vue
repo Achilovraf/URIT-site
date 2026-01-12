@@ -1,6 +1,6 @@
 <!-- urit-86-landing/src/components/AboutProduct.vue -->
 <template>
-  <section id="about" class="py-20 px-4 bg-gradient-to-b from-blue-50 to-white">
+  <section id="about" class="py-20 px-4 ">
     <div class="max-w-7xl mx-auto">
       <!-- Заголовок карточек -->
       <div class="text-center mb-12">

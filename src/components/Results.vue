@@ -1,5 +1,5 @@
 <template>
-  <section id="results" class="py-20 px-4 bg-white">
+  <section id="results" class="py-20 px-4">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">
         {{ locale === 'ru' ? 'Что показывает тест' : 'Test nimani ko\'rsatadi' }}

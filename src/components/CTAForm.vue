@@ -1,10 +1,10 @@
 <template>
-  <section id="contact" class="py-20 px-4 bg-gradient-to-br from-blue-600 to-indigo-700">
+  <section id="contact" class="py-20 px-4 bg-gradient-to-br ">
     <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-6 text-white">
+      <h2 class="text-4xl font-bold mb-6 text-gray-900">
         {{ locale === 'ru' ? 'Остались вопросы?' : 'Savollaringiz bormi?' }}
       </h2>
-      <p class="text-xl text-blue-100 mb-8">
+      <p class="text-xl text-gray-700 mb-8">
         {{ locale === 'ru' 
           ? 'Оставьте заявку, и мы свяжемся с вами'
           : 'Ariza qoldiring, biz siz bilan bog\'lanamiz'
