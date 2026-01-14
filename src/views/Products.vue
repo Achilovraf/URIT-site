@@ -263,7 +263,7 @@ const mockProducts = [
     id: 2, 
     name: {
       ru: "Тест-полоски URIT H12 для гемоглобина",
-      uz: "URIT H12 gemoglobin test chiziqlar",
+      uz: "URIT H12 gemoglobin test chiziqlari",
     },
     description: {
       ru: "Тест-полоски для измерения гемоглобина. Результат за 10 секунд. Диапазон измерений 4.0-24.0 г/дл. Упаковка 50 шт (2×25)",
@@ -272,6 +272,21 @@ const mockProducts = [
     image: `${baseUrl}images/urit-h12-strips.jpg`, 
     rating: 4.8,
     reviews: 89,
+    category: "accessories",
+  },
+  {
+    id: 3,
+    name: {
+      ru: "Тест-полоски URIT G28 для глюкозы",
+      uz: "URIT G28 glyukoza test chiziqlari",
+    },
+    description: {
+      ru: "Тест-полоски для измерения уровня глюкозы в крови с глюкометром URIT-86. Быстрый результат за 5 секунд. Упаковка 50 шт",
+      uz: "URIT-86 glyukometri bilan qondagi glyukoza darajasini o'lchash uchun test chiziqlari. 5 soniyada tez natija. 50 donali qadoq",
+    },
+    image: `${baseUrl}images/test-poloska-g28.jpg`,
+    rating: 4.9,
+    reviews: 156,
     category: "accessories",
   },
   {

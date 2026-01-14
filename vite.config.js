@@ -15,5 +15,5 @@ export default defineConfig({
     host: true,
     strictPort: false,
   },
-  base: '/', 
+  base: '/URIT-site/', 
 })

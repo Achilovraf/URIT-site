@@ -46,36 +46,73 @@
         </div>
       </div>
 
-      <!-- EC Сертификат -->
-      <div class="">
-        <h3 class="text-3xl font-bold text-center mb-10 text-gray-900">
+      <!-- Сертификаты и документация -->
+      <div class="mt-20">
+        <h3 class="text-2xl font-bold text-center mb-10 text-gray-800">
           {{ content.certTitle[locale] }}
         </h3>
 
-        <div
-          class="flex flex-col md:flex-row items-center gap-8 p-8 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:shadow-lg transition-shadow border border-blue-200"
-        >
-          <div class="flex-shrink-0">
-            <div
-              class="w-40 h-40 bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
-            >
-              <img src="@/assets/TÜVSÜD.png" class="w-500" alt="TÜV SÜD" />
+        <div class="max-w-4xl mx-auto space-y-4">
+          <!-- EC Certificate -->
+          <div
+            class="bg-white border border-gray-200 rounded-lg p-5 hover:border-blue-500 transition-all duration-300 flex items-center justify-between"
+          >
+            <div class="flex items-center gap-3 flex-1">
+              <img
+                src="@/assets/TÜVSÜD.png"
+                alt="TÜV SÜD"
+                class="w-10 h-10 object-contain"
+              />
+              <span class="text-blue-600 text-sm">▼</span>
+              <a
+                href="/files/EC_Certificate_URIT.pdf"
+                target="_blank"
+                class="text-blue-600 hover:text-blue-700 font-normal text-base flex-1"
+              >
+                {{ content.cert1Title[locale] }}
+              </a>
             </div>
           </div>
-          <div class="flex-1">
-            <h4 class="text-2xl font-bold text-gray-900 mb-3">
-              {{ content.certName[locale] }}
-            </h4>
-            <p class="text-gray-800 leading-relaxed text-lg mb-4">
-              {{ content.certDesc[locale] }}
-            </p>
-            <div class="space-y-2 text-gray-700">
-              <p>
-                <span class="font-semibold"
-                  >{{ content.certIssuer[locale] }}:</span
-                >
-                TÜV SÜD Product Service GmbH
-              </p>
+
+          <!-- Registration Certificate -->
+          <div
+            class="bg-white border border-gray-200 rounded-lg p-5 hover:border-blue-500 transition-all duration-300 flex items-center justify-between"
+          >
+            <div class="flex items-center gap-3 flex-1">
+              <img
+                src="@/assets/registrasionnoe.png"
+                alt="Registration"
+                class="w-1- h-10 object-contain"
+              />
+              <span class="text-blue-600 text-sm">▼</span>
+              <a
+                href="/files/URIT_86.pdf"
+                target="_blank"
+                class="text-blue-600 hover:text-blue-700 font-normal text-base flex-1"
+              >
+                {{ content.cert2Title[locale] }}
+              </a>
+            </div>
+          </div>
+
+          <!-- Confirmation Document -->
+          <div
+            class="bg-white border border-gray-200 rounded-lg p-5 hover:border-blue-500 transition-all duration-300 flex items-center justify-between"
+          >
+            <div class="flex items-center gap-3 flex-1">
+              <img
+                src="@/assets/ssv.png"
+                alt="Ministry of Health"
+                class="w-10 h-10 object-contain"
+              />
+              <span class="text-blue-600 text-sm">▼</span>
+              <a
+                href="/files/ФК подтверждение.pdf"
+                target="_blank"
+                class="text-blue-600 hover:text-blue-700 font-normal text-base flex-1"
+              >
+                {{ content.cert3Title[locale] }}
+              </a>
             </div>
           </div>
         </div>
@@ -88,7 +125,7 @@
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <a
-            href="tel:+998712345678"
+            href="tel:+998900038666"
             class="inline-flex items-center gap-2 bg-white border-2 border-blue-600 text-blue-600 font-semibold px-8 py-3 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
           >
             <svg
@@ -156,20 +193,24 @@ const content = {
     uz: "Saytga o'tish",
   },
   certTitle: {
-    ru: "Международная сертификация",
-    uz: "Xalqaro sertifikatsiya",
+    ru: "Сертификаты и документация",
+    uz: "Sertifikatlar va hujjatlar",
+    en: "Certificates and Documentation",
   },
-  certName: {
-    ru: "EC Сертификат соответствия",
-    uz: "EC Sertifikati",
+  cert1Title: {
+    ru: "EC Сертификат соответствия TÜV SÜD",
+    uz: "TÜV SÜD EC muvofiqlik sertifikati",
+    en: "TÜV SÜD EC Certificate of Conformity",
   },
-  certDesc: {
-    ru: "URIT-86 прошел независимую проверку и получил сертификат соответствия директиве ЕС 98/79/EC по изделиям медицинского назначения для in vitro диагностики. Это подтверждает, что устройство соответствует самым строгим международным стандартам качества и безопасности. Сертификация проведена авторитетной немецкой организацией TÜV SÜD, что гарантирует надежность и точность глюкометра.",
-    uz: "URIT-86 mustaqil tekshiruvdan o'tgan va in vitro diagnostika uchun tibbiy mahsulotlar bo'yicha AB 98/79/EC direktivasiga mos keladigan sertifikat olgan. Bu qurilma eng qat'iy xalqaro sifat va xavfsizlik standartlariga javob berishini tasdiqlaydi. Sertifikatsiya nufuzli nemis tashkiloti TÜV SÜD tomonidan o'tkazilgan bo'lib, glyukometrning ishonchli va aniqligini kafolatlanadi.",
+  cert2Title: {
+    ru: "Регистрационное удостоверение Республики Узбекистан",
+    uz: "O'zbekiston Respublikasi ro'yxatdan o'tkazish guvohnomasi",
+    en: "Registration Certificate of the Republic of Uzbekistan",
   },
-  certIssuer: {
-    ru: "Выдано",
-    uz: "Berilgan",
+  cert3Title: {
+    ru: "Подтверждение Министерства здравоохранения РУз",
+    uz: "O'zbekiston Sog'liqni saqlash vazirligining tasdiqnomasi",
+    en: "Confirmation from the Ministry of Health of Uzbekistan",
   },
   contactText: {
     ru: "Есть вопросы? Свяжитесь с нами",
