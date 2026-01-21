@@ -1,64 +1,176 @@
-<!-- urit-86-landing/src/components/modals/InstructionModal.vue -->
 <template>
-  <BaseModal :show="isOpen" @close="closeModal">
-    <div class="p-8 lg:p-12">
-      <!-- Заголовок -->
-      <h2 class="text-3xl lg:text-2xl pt-5 font-bold text-center text-gray-900 mb-8">
-        ИНСТРУКЦИЯ ПО ПРИМЕНЕНИЮ ГЛЮКОМЕТРА<br />
-      </h2>
+  <Teleport to="body">
+    <Transition name="modal">
+      <div
+        v-if="isOpen"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4"
+        @click.self="closeModal"
+      >
+        <!-- Overlay -->
+        <div
+          class="absolute inset-0 bg-black/70 backdrop-blur-sm"
+          @click="closeModal"
+        ></div>
 
-      <!-- Изображение продукта -->
-      <div class="flex justify-center mb-10">
-        <img
-          src="/images/glucometer-4.png"
-          alt="URIT-86 Глюкометр"
-          class="w-64 h-auto lg:w-80 object-contain drop-shadow-2xl"
-        />
-      </div>
-
-      <!-- Кнопка -->
-      <div class="flex justify-center">
-        <a
-          href="/URIT-site/files/urit-86-instruction.pdf"
-          target="_blank"
-          class="group inline-flex items-center gap-3 
-      border-2  border-indigo-700
-      bg-white border-gradient-to-r from-blue-600 to-indigo-600 
-      text-black font-bold px-10 py-4 rounded-xl 
-      shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105
-      hover:text-white hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700 hover:[background-clip:border-box]"
+        <!-- Modal Content -->
+        <div
+          class="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden z-10"
         >
-          <PdfFileIcon
-            class="w-6 h-6 text-black group-hover:text-white transition-colors duration-300"
-          />
-          <span>Инструкция по глюкометру</span>
-        </a>
+          <!-- Header -->
+          <div
+            class="flex items-center justify-between p-6 border-b border-gray-200"
+          >
+            <h3 class="text-2xl font-bold text-gray-900">
+              {{ content.title[locale] }}
+            </h3>
+            <button
+              @click="closeModal"
+              class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Close"
+            >
+              <svg
+                class="w-6 h-6 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Video Content -->
+          <div class="relative bg-black aspect-video">
+            <video
+              ref="videoPlayer"
+              class="w-full h-full"
+              controls
+              controlsList="nodownload"
+              @ended="onVideoEnded"
+            >
+              <source src="/files/Instruksiya.MP4" type="video/mp4" />
+              {{ content.notSupported[locale] }}
+            </video>
+          </div>
+
+          <!-- Footer -->
+          <div class="p-6 bg-gray-50 border-t border-gray-200">
+            <button
+              @click="closeModal"
+              class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300"
+            >
+              {{ content.closeButton[locale] }}
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </BaseModal>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import BaseModal from "./BaseModal.vue";
-import PdfFileIcon from "@/assets/icons/PdfFileIcon.vue";
+import { ref, computed, watch } from "vue";
+import { useAppStore } from "../../store";
+
+const store = useAppStore();
+const locale = computed(() => store.locale);
 
 const isOpen = ref(false);
+const videoPlayer = ref(null);
+
+const content = {
+  title: {
+    ru: "Видео инструкция",
+    uz: "Video yo'riqnoma",
+  },
+  notSupported: {
+    ru: "Ваш браузер не поддерживает видео.",
+    uz: "Brauzeringiz videoni qo'llab-quvvatlamaydi.",
+  },
+  closeButton: {
+    ru: "Закрыть",
+    uz: "Yopish",
+  },
+};
 
 const openModal = () => {
   isOpen.value = true;
+  // Запускаем видео при открытии модального окна
+  setTimeout(() => {
+    if (videoPlayer.value) {
+      videoPlayer.value.play();
+    }
+  }, 100);
 };
 
 const closeModal = () => {
+  // Останавливаем видео при закрытии
+  if (videoPlayer.value) {
+    videoPlayer.value.pause();
+    videoPlayer.value.currentTime = 0;
+  }
   isOpen.value = false;
 };
 
-const downloadInstruction = () => {
-  window.open("/files/urit-86-instruction.pdf", "_blank");
+const onVideoEnded = () => {
+  // Можно добавить действие после окончания видео
+  console.log("Video ended");
 };
 
-// Экспортируем метод для открытия модалки
+// Закрытие по клавише Escape
+watch(isOpen, (newVal) => {
+  if (newVal) {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    // Убираем слушатель при закрытии
+    return () => window.removeEventListener("keydown", handleEsc);
+  }
+});
+
 defineExpose({
   openModal,
+  closeModal,
 });
 </script>
+
+<style scoped>
+/* Modal transition animations */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .relative,
+.modal-leave-active .relative {
+  transition: transform 0.3s ease;
+}
+
+.modal-enter-from .relative,
+.modal-leave-to .relative {
+  transform: scale(0.9);
+}
+
+/* Custom video controls styling */
+video::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+video::-webkit-media-controls-play-button {
+  background-color: #2563eb;
+  border-radius: 50%;
+}
+</style>

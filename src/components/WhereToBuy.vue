@@ -1,5 +1,5 @@
 <template>
-  <section id="buy" class="py-20 px-4 bg-gradient-to-b ">
+  <section id="buy" class="py-4 px-4 bg-gradient-to-b ">
     <div class="max-w-7xl mx-auto">
       <!-- Заголовок секции -->
       <div class="text-center mb-16">

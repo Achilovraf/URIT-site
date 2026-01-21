@@ -1,5 +1,5 @@
 <template>
-  <section id="steps" class="py-20 px-4 bg-gradient-to-b ">
+  <section id="steps" class="py-4 px-4 bg-gradient-to-b ">
     <div class="max-w-7xl mx-auto">
       <!-- Заголовок секции -->
       <div class="text-center mb-16">
@@ -77,26 +77,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Кнопка скачать полную инструкцию -->
-      <div class="text-center">
-        <div class="flex justify-center">
-        <a
-          href="/URIT-site/files/urit-86-instruction.pdf"
-          target="_blank"
-          class="group inline-flex items-center gap-3 
-      border-2  border-indigo-700
-      bg-white border-gradient-to-r from-blue-600 to-indigo-600 
-      text-black font-bold px-10 py-4 rounded-xl 
-      shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105
-      hover:text-white hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700 hover:[background-clip:border-box]"
-        >
-          <PdfFileIcon
-            class="w-6 h-6 text-black group-hover:text-white transition-colors duration-300"/>
-          <span>{{ content.downloadButton[locale] }}</span>
-        </a>
-      </div>
-      </div>
     </div>
   </section>
 </template>
@@ -127,10 +107,6 @@ const content = {
   warningText: {
     ru: "Не пытайтесь пополнить пробу крови в лимфатическом отверстии, даже если вы видите недостаточное количество в окне подтверждения. Удалите тест-полоску и повторите с новой полоской.",
     uz: "Tasdiqlash oynasida yetarli miqdor ko'rinmasa ham, limfa teshigiga qon namunasini to'ldirishga urinmang. Test chizig'ini olib tashlang va yangi chiziq bilan takrorlang.",
-  },
-  downloadButton: {
-    ru: "Скачать полную инструкцию (PDF)",
-    uz: "To'liq yo'riqnomani yuklab olish (PDF)",
   },
 };
 
@@ -168,5 +144,6 @@ const mainSteps = [
       uz: "Test chizig'ini joylashtiring - glyukometr avtomatik yoqiladi",
     },
   },
+  
 ];
 </script>
