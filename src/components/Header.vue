@@ -4,58 +4,76 @@
     :class="{
       'backdrop-blur-md bg-white/80 shadow-lg': isScrolled,
       'bg-transparent': !isScrolled
-    }">
+    }"
+  >
     <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-10">
       <div class="py-4 flex items-center justify-between">
 
-        <!-- Логотип -->
+        <!-- Logo -->
         <router-link to="/" class="flex items-center gap-2">
           <span class="bg-blue-600 w-3 h-8 rounded"></span>
           <span class="text-4xl font-bold text-blue-700">URIT</span>
           <span class="bg-blue-600 w-3 h-8 rounded"></span>
         </router-link>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center gap-8">
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-10">
           <template v-for="(item, index) in navItems" :key="index">
 
-            <!-- Anchor link (#section) -->
-            <a
-              v-if="item.href.startsWith('#')"
-              href="#"
-              @click.prevent="navigateToSection(item.href)"
-              class="text-gray-700 hover:text-blue-600 transition-colors font-medium cursor-pointer"
-              :class="{ 'text-blue-600 font-bold': item.active }"
+            <component
+              :is="item.href.startsWith('#') ? 'a' : 'router-link'"
+              :href="item.href.startsWith('#') ? '#' : null"
+              :to="!item.href.startsWith('#') ? item.href : null"
+              @click.prevent="item.href.startsWith('#') && navigateToSection(item.href)"
+              class="relative group h-6 overflow-hidden font-medium text-gray-700"
+              :class="{ 'text-blue-600': item.active }"
             >
-              {{ item.label[locale] }}
-            </a>
 
-            <!-- Router link -->
-            <router-link
-              v-else
-              :to="item.href"
-              class="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              :class="{ 'text-blue-600 font-bold': item.active }"
-            >
-              {{ item.label[locale] }}
-            </router-link>
+              <!-- Text normal -->
+              <span
+                class="block transition-all duration-300
+                group-hover:translate-y-full group-hover:opacity-0"
+              >
+                {{ item.label[locale] }}
+              </span>
+
+              <!-- Text hover -->
+              <span
+                class="absolute left-0 top-0 block w-full
+                -translate-y-full opacity-0
+                transition-all duration-300
+                group-hover:translate-y-0 group-hover:opacity-100
+                text-blue-600"
+              >
+                {{ item.label[locale] }}
+              </span>
+
+              <!-- underline -->
+              <span
+                class="absolute left-0 -bottom-1 h-[2px] w-0 bg-blue-600 transition-all duration-300
+                group-hover:w-full"
+                :class="{ 'w-full': item.active }"
+              ></span>
+
+            </component>
 
           </template>
         </nav>
 
-        <!-- Right Section -->
+        <!-- Right -->
         <div class="flex items-center gap-4">
           <LanguageSwitcher />
 
           <a
             href="#"
             @click.prevent="navigateToSection('#buy')"
-            class="hidden lg:block bg-transparent hover:bg-blue-600 text-blue-600 font-semibold px-6 py-2 rounded-full border border-blue-600 hover:text-white transition-all cursor-pointer"
+            class="hidden lg:block border border-blue-600 text-blue-600 font-semibold
+            px-6 py-2 rounded-full transition-all duration-300
+            hover:bg-blue-600 hover:text-white"
           >
             {{ locale === 'ru' ? 'Где купить?' : 'Qayerdan sotib olish?' }}
           </a>
 
-          <!-- Mobile menu toggle -->
           <button
             @click="mobileMenuOpen = !mobileMenuOpen"
             class="lg:hidden p-2"
@@ -66,73 +84,35 @@
             </svg>
           </button>
         </div>
+
       </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div
-      v-if="mobileMenuOpen"
-      class="lg:hidden backdrop-blur-md bg-white/95 border-t border-gray-200"
-    >
-      <nav class="max-w-7xl mx-auto flex flex-col px-6 py-4 space-y-3">
-        <template v-for="(item, index) in navItems" :key="index">
-
-          <!-- Anchor link -->
-          <a
-            v-if="item.href.startsWith('#')"
-            href="#"
-            @click.prevent="navigateToSection(item.href); mobileMenuOpen = false"
-            class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 cursor-pointer"
-          >
-            {{ item.label[locale] }}
-          </a>
-
-          <!-- Router link -->
-          <router-link
-            v-else
-            :to="item.href"
-            class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-            @click="mobileMenuOpen = false"
-          >
-            {{ item.label[locale] }}
-          </router-link>
-
-        </template>
-
-        <a
-          href="#"
-          @click.prevent="navigateToSection('#buy'); mobileMenuOpen = false"
-          class="bg-transparent text-gray-900 font-semibold px-6 py-3 rounded-full border-2 border-gray-900 hover:border-blue-600 hover:text-blue-600 transition-all mt-2 cursor-pointer"
-        >
-          {{ locale === 'ru' ? 'Где купить?' : 'Qayerdan sotib olish?' }}
-        </a>
-      </nav>
     </div>
   </header>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { useAppStore } from '../store'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useAppStore } from '../store'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const store = useAppStore()
 const locale = computed(() => store.locale)
+
 const router = useRouter()
 const route = useRoute()
 
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
 
-const navItems = [
+const navItems = ref([
   {
     label: { ru: 'Инструкция', uz: "Yo'riqnoma" },
     href: '#about',
     active: false
   },
   {
-    label: { ru: 'Принцип действия', uz: "Ta'sir qilish prinsipi" },
+    label: { ru: 'Принцип действия', uz: "Taʼsir qilish prinsipi" },
     href: '#advantages',
     active: false
   },
@@ -142,38 +122,27 @@ const navItems = [
     active: false
   },
   {
-    label: { ru: 'Продукция', uz: "Mahsulotlar" },
+    label: { ru: 'Продукция', uz: 'Mahsulotlar' },
     href: '/products',
     active: false
   }
-]
+])
 
-// Плавный скролл к секции
-const scrollToSection = (sectionId) => {
-  const section = document.querySelector(sectionId)
-  if (section) {
-    const headerOffset = 80
-    const elementPosition = section.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+const scrollToSection = (id) => {
+  const el = document.querySelector(id)
+  if (!el) return
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    })
-  }
+  const offset = 80
+  const y = el.getBoundingClientRect().top + window.pageYOffset - offset
+  window.scrollTo({ top: y, behavior: 'smooth' })
 }
 
-// Навигация к секции (с учетом текущей страницы)
-const navigateToSection = (sectionId) => {
-  // Если мы уже на главной странице — просто скроллим
+const navigateToSection = (id) => {
   if (route.path === '/') {
-    scrollToSection(sectionId)
+    scrollToSection(id)
   } else {
-    // Если на другой странице — сначала переходим на главную, потом скроллим
     router.push('/').then(() => {
-      setTimeout(() => {
-        scrollToSection(sectionId)
-      }, 100)
+      setTimeout(() => scrollToSection(id), 100)
     })
   }
 }

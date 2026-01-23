@@ -53,7 +53,7 @@
               controlsList="nodownload"
               @ended="onVideoEnded"
             >
-              <source src="/files/Instruksiya.MP4" type="video/mp4" />
+              <source src="/files/instruksiya.mp4" type="video/mp4" />
               {{ content.notSupported[locale] }}
             </video>
           </div>
