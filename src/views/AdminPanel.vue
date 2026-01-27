@@ -89,17 +89,46 @@
         <form @submit.prevent="saveSettings" class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
-              Ваш Telegram Chat ID
+              Telegram Chat ID (можно добавить несколько)
             </label>
-            <input 
-              v-model="chatId"
-              type="text"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none font-mono text-sm"
-              placeholder="1234567890"
+            
+            <!-- Список существующих Chat ID -->
+            <div class="space-y-2 mb-3">
+              <div 
+                v-for="(id, index) in chatIds" 
+                :key="index"
+                class="flex gap-2"
+              >
+                <input 
+                  v-model="chatIds[index]"
+                  type="text"
+                  required
+                  class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none font-mono text-sm"
+                  placeholder="1234567890"
+                >
+                <button
+                  type="button"
+                  @click="removeChatId(index)"
+                  v-if="chatIds.length > 1"
+                  class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+                  title="Удалить"
+                >
+                  🗑️
+                </button>
+              </div>
+            </div>
+
+            <!-- Кнопка добавления нового Chat ID -->
+            <button
+              type="button"
+              @click="addChatId"
+              class="w-full px-4 py-2 border-2 border-dashed border-gray-300 hover:border-blue-500 text-gray-600 hover:text-blue-600 rounded-lg transition-colors"
             >
-            <p class="text-xs text-gray-500 mt-1">
-              Это ваш личный Chat ID из Telegram
+              ➕ Добавить еще Chat ID
+            </button>
+
+            <p class="text-xs text-gray-500 mt-2">
+              Уведомления будут отправлены всем добавленным Chat ID
             </p>
           </div>
 
@@ -108,7 +137,7 @@
               type="submit"
               class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors"
             >
-              💾 Сохранить Chat ID
+              💾 Сохранить настройки
             </button>
           </div>
 
@@ -119,11 +148,18 @@
               :disabled="isTesting"
               class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors disabled:opacity-50"
             >
-              {{ isTesting ? '⏳ Проверка...' : '🧪 Отправить тестовое сообщение' }}
+              {{ isTesting ? '⏳ Проверка...' : '🧪 Отправить тестовое сообщение всем' }}
             </button>
-            <p v-if="testResult" :class="testResult.success ? 'text-green-600' : 'text-red-600'" class="text-sm text-center mt-2">
-              {{ testResult.message }}
-            </p>
+            <div v-if="testResults.length > 0" class="mt-3 space-y-1">
+              <p 
+                v-for="(result, index) in testResults" 
+                :key="index"
+                :class="result.success ? 'text-green-600' : 'text-red-600'" 
+                class="text-sm"
+              >
+                {{ result.message }}
+              </p>
+            </div>
           </div>
 
           <div class="pt-4 border-t">
@@ -164,7 +200,7 @@ import { ref, onMounted } from 'vue'
 // Константа - Bot Token (не меняется)
 const TELEGRAM_BOT_TOKEN = '7972853596:AAFKV9p7clUHaqj_Oc6rFnz63l8p-Ss4ERA'
 
-const STORAGE_KEY = 'urit_chat_id'
+const STORAGE_KEY = 'urit_chat_ids' // Изменено на множественное число
 const PASSWORD_KEY = 'urit_admin_password'
 
 const isPasswordSet = ref(false)
@@ -172,11 +208,11 @@ const isAuthenticated = ref(false)
 const loginError = ref(false)
 const saveSuccess = ref(false)
 const isTesting = ref(false)
-const testResult = ref(null)
+const testResults = ref([]) // Изменено на массив результатов
 
 const password = ref('')
 const newPassword = ref('')
-const chatId = ref('')
+const chatIds = ref(['']) // Теперь массив Chat ID
 
 // Простое шифрование (base64)
 const encode = (str) => btoa(unescape(encodeURIComponent(str)))
@@ -224,13 +260,28 @@ const loadSettings = () => {
   if (saved) {
     const decoded = decode(saved)
     if (decoded) {
-      chatId.value = decoded
+      try {
+        const parsed = JSON.parse(decoded)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          chatIds.value = parsed
+        }
+      } catch {
+        // Если старый формат (одиночный Chat ID), конвертируем в массив
+        chatIds.value = [decoded]
+      }
     }
   }
 }
 
 const saveSettings = () => {
-  const encoded = encode(chatId.value)
+  // Фильтруем пустые значения
+  const validIds = chatIds.value.filter(id => id.trim() !== '')
+  if (validIds.length === 0) {
+    alert('❌ Добавьте хотя бы один Chat ID')
+    return
+  }
+  
+  const encoded = encode(JSON.stringify(validIds))
   localStorage.setItem(STORAGE_KEY, encoded)
   saveSuccess.value = true
   setTimeout(() => {
@@ -238,40 +289,66 @@ const saveSettings = () => {
   }, 3000)
 }
 
+const addChatId = () => {
+  chatIds.value.push('')
+}
+
+const removeChatId = (index) => {
+  if (chatIds.value.length > 1) {
+    chatIds.value.splice(index, 1)
+  }
+}
+
 const testConnection = async () => {
-  if (!chatId.value) {
-    testResult.value = { success: false, message: '❌ Введите Chat ID' }
+  const validIds = chatIds.value.filter(id => id.trim() !== '')
+  
+  if (validIds.length === 0) {
+    testResults.value = [{ success: false, message: '❌ Добавьте хотя бы один Chat ID' }]
     return
   }
 
   isTesting.value = true
-  testResult.value = null
+  testResults.value = []
 
   const text = `🧪 Тестовое сообщение от URIT-86\n\n✅ Настройки работают!\n⏰ ${new Date().toLocaleString('ru-RU')}`
 
-  try {
-    const response = await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId.value,
-          text: text
+  // Отправляем тестовое сообщение всем Chat ID
+  for (let i = 0; i < validIds.length; i++) {
+    const chatId = validIds[i]
+    
+    try {
+      const response = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: text
+          })
+        }
+      )
+
+      if (response.ok) {
+        testResults.value.push({ 
+          success: true, 
+          message: `✅ Chat ID ${chatId}: сообщение отправлено!` 
+        })
+      } else {
+        testResults.value.push({ 
+          success: false, 
+          message: `❌ Chat ID ${chatId}: ошибка отправки` 
         })
       }
-    )
-
-    if (response.ok) {
-      testResult.value = { success: true, message: '✅ Тестовое сообщение отправлено!' }
-    } else {
-      testResult.value = { success: false, message: '❌ Ошибка: проверьте Chat ID' }
+    } catch (error) {
+      testResults.value.push({ 
+        success: false, 
+        message: `❌ Chat ID ${chatId}: ошибка соединения` 
+      })
     }
-  } catch (error) {
-    testResult.value = { success: false, message: '❌ Ошибка соединения' }
-  } finally {
-    isTesting.value = false
   }
+
+  isTesting.value = false
 }
 
 const changePassword = () => {
