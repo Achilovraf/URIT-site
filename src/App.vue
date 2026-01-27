@@ -16,7 +16,7 @@
 
     <!-- ================= TELEGRAM FLOAT BUTTON ================= -->
 <a
-  href="https://t.me/nilufar_abdunazarovaa"
+  href="https://t.me/Urit86"
   target="_blank"
   class="fixed bottom-6 right-6 z-50 group
   flex items-center justify-center

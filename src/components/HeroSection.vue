@@ -30,29 +30,16 @@
           <div class="flex flex-wrap gap-4 pt-4">
             <a
             href="#buy"
-              class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-blue-50"
+              class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-6 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-blue-50"
             > 
               {{ content.buyButton[locale] }}
           </a>
             
             <button
               @click="$emit('open-modal')"
-              class="group inline-flex items-center gap-3 border-2 border-indigo-600 bg-transparent text-black font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r from-blue-600 to-indigo-600 hover:text-white"
+              class="group inline-flex items-center gap-3 border-2 border-indigo-600 bg-transparent text-black font-bold px-6 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r from-blue-600 to-indigo-600 hover:text-white"
             >
               <span class="text-lg">{{ content.buttonText[locale] }}</span>
-              <svg
-                class="w-6 h-6 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
             </button>
           </div>
 
@@ -72,7 +59,7 @@
             <div class="flex items-center gap-3">
               <!-- Instagram -->
               <a
-                href="https://www.instagram.com/hed__marketing/"
+                href="https://www.instagram.com/hed__distribution/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="group relative"
@@ -121,7 +108,7 @@
 
               <!-- Telegram -->
               <a
-                href="https://t.me/hurshidaenterdelux"
+                href="https://t.me/UritUzbekistan"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="group relative"
@@ -199,27 +186,27 @@ const locale = computed(() => store.locale);
 const content = {
   title: {
     ru: "Контролируй сахар легко - ",
-    uz: "Qand darajangizni oson boshqaring",
+    uz: "Qondagi glukoza darajasini",
   },
   subtitle: {
     ru: "с заботой о себе ",
-    uz: "o'zingiz va yaqinlaringiz.",
+    uz: "oson boshqaring",
   },
   time: {
     ru: "и близких.",
-    uz: "parvarishi uchun.",
+    uz: "O'zingiz va oilangiz parvarishi uchun.",
   },
   description: {
     ru: "Компактный и быстрый глюкометр с высокой точностью. Результат за 5 секунд минимальный прокол, максимум удобства. Забудьте о бесконечной очереди в поликлинике и сложных измерениях - все просто !",
-    uz: "1 va 2-toifa diabet kasalligiga chalingan bemorlarning qon glyukoza darajasini muntazam o'lchash, shuningdek profilaktik nazorat qilish uchun ishlatiladi",
+    uz: "1 va 2-toifa diabet kasalligiga chalingan bemorlarning qondagi glyukoza darajasini muntazam o'lchash, shuningdek profilaktik nazorat qilish uchun ishlatiladi",
   },
   buyButton: {
     ru: "Где купить",
     uz: "Qayerdan sotib olish",
   },
   buttonText: {
-    ru: "Смотреть инструкцию",
-    uz: "Yo'riqnomani ko'rish",
+    ru: "Смотреть инструкцию по применению",
+    uz: "Video qo'llanmani ko'rish",
   },
   socialTitle: {
     ru: "Мы в соцсетях",

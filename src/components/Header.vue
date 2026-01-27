@@ -107,7 +107,7 @@ const mobileMenuOpen = ref(false)
 
 const navItems = ref([
   {
-    label: { ru: 'Инструкция', uz: "Yo'riqnoma" },
+    label: { ru: 'Инструкция по применению', uz: "Qo'llanma" },
     href: '#about',
     active: false
   },

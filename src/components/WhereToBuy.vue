@@ -14,9 +14,6 @@
 
       <!-- ================= ПАРТНЁРЫ ================= -->
       <div class="mb-24">
-        <h3 class="text-2xl font-bold text-center mb-10 text-gray-800">
-          {{ content.partnersTitle[locale] }}
-        </h3>
 
         <div class="grid md:grid-cols-3 gap-8">
           <div
@@ -59,7 +56,7 @@
 
     <!-- CERT 1 -->
     <a
-      href="/files/EC_Certificate_URIT.pdf"
+      href="/URIT-site/files/EC Certificate URIT.pdf"
       target="_blank"
       class="group cursor-pointer"
     >
@@ -89,7 +86,7 @@
 
     <!-- CERT 2 -->
     <a
-      href="/files/URIT_86.pdf"
+      href="/URIT-site/files/URIT_86.pdf"
       target="_blank"
       class="group cursor-pointer"
     >
@@ -119,7 +116,7 @@
 
     <!-- CERT 3 -->
     <a
-      href="/files/ФК_подтверждение.pdf"
+      href="/URIT-site/files/ФК подтверждение.pdf"
       target="_blank"
       class="group cursor-pointer"
     >
@@ -235,8 +232,8 @@ const openModal = (partner) => {
 const content = {
   title: { ru: 'Где купить URIT-86', uz: 'URIT-86 ni qayerdan sotib olish mumkin' },
   subtitle: {
-    ru: 'Глюкометр доступен в крупнейших аптечных сетях Узбекистана',
-    uz: 'Glyukometr Oʻzbekiston dorixonalarida mavjud'
+    ru: 'Доступен в крупнейших аптечных сетях Узбекистана',
+    uz: 'Oʻzbekiston boʻylab barcha dorixonalarida mavjud'
   },
   partnersTitle: { ru: 'Наши партнёры', uz: 'Bizning hamkorlarimiz' },
   visitButton: { ru: 'Посетить сайт', uz: 'Saytga o‘tish' },
@@ -258,7 +255,7 @@ const partners = [
       uz: 'Toshkent bo‘ylab yetkazib berish'
     },
     products: {
-      lancets: { icon: 'images/lancets_icon.png', link: 'https://gopharm.uz/lancets-link' },
+      lancets: { icon: 'images/lancets_icon.png', link: 'https://gopharm.uz/product/test-poloski-urit-g28-bez-kodirovaniia-no50' },
       glucometer: {
         icon: 'images/glucometer_icon.png',
         link: 'https://gopharm.uz/product/gliukometr-urit-86-s-aksessuarami'
