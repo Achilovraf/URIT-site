@@ -73,38 +73,14 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useAppStore } from '../store'
 
 const store = useAppStore()
 const locale = computed(() => store.locale)
 
-// Константа - Bot Token
-const TELEGRAM_BOT_TOKEN = '7972853596:AAFKV9p7clUHaqj_Oc6rFnz63l8p-Ss4ERA'
-
-const decode = (str) => {
-  try {
-    return decodeURIComponent(escape(atob(str)))
-  } catch {
-    return null
-  }
-}
-
-const getTelegramChatId = () => {
-  const saved = localStorage.getItem('urit_chat_id')
-  if (saved) {
-    const decoded = decode(saved)
-    if (decoded) return decoded
-  }
-  // Дефолтный Chat ID (ваш)
-  return '1364515770'
-}
-
-const chatId = ref(getTelegramChatId())
-
-onMounted(() => {
-  chatId.value = getTelegramChatId()
-})
+const BOT_TOKEN = '7972853596:AAFKV9p7clUHaqj_Oc6rFnz63l8p-Ss4ERA'
+const CHAT_IDS = ['8059965247', '880122541']
 
 const formData = ref({
   name: '',
@@ -128,47 +104,27 @@ const handleSubmit = async () => {
 📞 <b>Телефон:</b> ${formData.value.phone}
 ${formData.value.message ? `💬 <b>Сообщение:</b> ${formData.value.message}` : ''}
 
-⏰ <i>${new Date().toLocaleString('ru-RU', { 
-    dateStyle: 'short', 
-    timeStyle: 'short' 
-  })}</i>
+⏰ <i>${new Date().toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' })}</i>
   `.trim()
 
   try {
-    const response = await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: chatId.value,
-          text: text,
-          parse_mode: 'HTML'
+    await Promise.allSettled(
+      CHAT_IDS.map(chatId =>
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' })
         })
-      }
+      )
     )
 
-    if (response.ok) {
-      showSuccess.value = true
-      formData.value = {
-        name: '',
-        phone: '',
-        message: ''
-      }
-      setTimeout(() => {
-        showSuccess.value = false
-      }, 5000)
-    } else {
-      throw new Error('Telegram API error')
-    }
+    showSuccess.value = true
+    formData.value = { name: '', phone: '', message: '' }
+    setTimeout(() => { showSuccess.value = false }, 5000)
   } catch (error) {
-    console.error('Error sending to Telegram:', error)
+    console.error('Ошибка:', error)
     showError.value = true
-    setTimeout(() => {
-      showError.value = false
-    }, 5000)
+    setTimeout(() => { showError.value = false }, 5000)
   } finally {
     isSubmitting.value = false
   }

@@ -1,0 +1,8 @@
+export const TELEGRAM_CONFIG = {
+  BOT_TOKEN: '7972853596:AAFKV9p7clUHaqj_Oc6rFnz63l8p-Ss4ERA',
+  CHAT_IDS: [
+    '8059965247',
+    '880122541',
+    '8313877559',
+  ],
+}
